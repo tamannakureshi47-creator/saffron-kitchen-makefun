@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saffron Kitchen — Dinner Rush</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body data-screen="title">
+<header class="topbar">
+  <div class="logo">🍳 Saffron Kitchen<small>Dinner Rush</small></div>
+  <div class="top-stats">
+    <span class="stat" id="shift-timer">⏱ 2:30</span>
+    <span class="stat">⭐ <span id="score-value">0</span></span>
+    <span class="stat">🪙 <span id="coins-value">$0</span></span>
+    <span class="stat" id="level-value">Level 1</span>
+    <span class="stat" id="served-value">0 served</span>
+    <button type="button" class="top-btn" id="mute-button" data-action="mute">🔊 Sound</button>
+    <button type="button" class="top-btn" data-action="pause">⏸ Pause</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="game-message" id="game-message" role="status">Welcome to Saffron Kitchen — serve every order before patience runs out!</p>
+
+  <h2 class="section-title">🧾 Order Board</h2>
+  <section id="order-board" aria-label="Customer orders"></section>
+
+  <h2 class="section-title">🥬 Ingredients on the Counter — tap, or drag to the plate</h2>
+  <section id="ingredient-counter" aria-label="Ingredients"></section>
+
+  <div class="kitchen-row">
+    <section class="panel" aria-label="Grill">
+      <h2>🔥 Grill &amp; Ready Tray</h2>
+      <div id="grill-slots"></div>
+      <p style="color:#8a6d4d;font-weight:700;font-size:13px;margin:10px 0 0">Patty, Bacon and Egg need 3 seconds on the grill. Tap the green ready card to plate it.</p>
+    </section>
+
+    <section class="panel" id="plate-area" aria-label="Plate">
+      <h2>🍽️ Your Plate — ready to serve</h2>
+      <div id="plate-items"></div>
+      <div class="serve-row">
+        <button type="button" class="btn btn-serve" data-action="serve">✅ Serve Dish</button>
+        <button type="button" class="btn btn-ghost" data-action="undo">↩ Undo</button>
+        <button type="button" class="btn btn-ghost" data-action="clear">🗑 Clear</button>
+      </div>
+    </section>
+  </div>
+
+  <h2 class="section-title">📖 Recipe Book</h2>
+  <section id="recipe-book" aria-label="Recipes"></section>
+  <p style="text-align:center;color:#8a4f24;font-weight:700">150-second shift · Space to start · P to pause · M to mute · Click or drag ingredients</p>
+</main>
+
+<div class="overlay" id="screen-title">
+  <div class="overlay-card">
+    <h1>🍳 Saffron<br><span>Kitchen</span></h1>
+    <p class="tagline">DINNER RUSH — a 150-second cooking challenge</p>
+    <p>Run your own little restaurant. Grill, stack and serve every order before the customer's patience runs out — and watch the rush get faster.</p>
+    <ol class="how">
+      <li><strong>Read the order board</strong> — each card shows the dish and every ingredient it needs.</li>
+      <li><strong>Tap ingredients</strong> on the counter, or drag them to the plate. Patty, Bacon and Egg go to the grill first.</li>
+      <li><strong>Serve</strong> when the plate exactly matches an order. A wrong dish costs points and breaks your combo.</li>
+      <li><strong>Beat the clock</strong> — serve fast for time bonuses, build combos, and unlock new recipes as you level up.</li>
+    </ol>
+    <button type="button" class="btn btn-start" data-action="start">▶ Start Shift</button>
+    <p style="font-weight:800;color:#8a6d4d">Original game · art, sounds and recipes made for this kitchen · plays offline</p>
+  </div>
+</div>
+
+<div class="overlay hidden" id="screen-paused">
+  <div class="overlay-card">
+    <h2>⏸ Paused</h2>
+    <p class="tagline">The kitchen is waiting for you.</p>
+    <button type="button" class="btn btn-start" data-action="resume">▶ Resume</button>
+    <button type="button" class="btn btn-ghost" data-action="restart" style="margin-left:8px">↻ Restart Shift</button>
+  </div>
+</div>
+
+<div class="overlay hidden" id="screen-over">
+  <div class="overlay-card">
+    <h2>🎉 Shift Over!</h2>
+    <div class="final-stars" id="final-stars" aria-label="0 out of 3 stars">☆☆☆</div>
+    <p class="tagline" id="final-verdict">A solid shift.</p>
+    <div class="final-grid">
+      <div class="final-cell"><b id="final-score">0</b><span>Score</span></div>
+      <div class="final-cell"><b id="final-served">0</b><span>Dishes served</span></div>
+      <div class="final-cell"><b id="final-coins">$0</b><span>Earned</span></div>
+      <div class="final-cell"><b id="final-combo">x0</b><span>Best combo</span></div>
+      <div class="final-cell"><b id="final-accuracy">100%</b><span>Accuracy</span></div>
+      <div class="final-cell"><b id="final-best">0</b><span>Best score</span></div>
+    </div>
+    <button type="button" class="btn btn-start" data-action="restart">↻ Play Again</button>
+  </div>
+</div>
+
+<p id="status" role="status" aria-live="polite"></p>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>

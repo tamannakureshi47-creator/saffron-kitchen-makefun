@@ -1,0 +1,112 @@
+/* Saffron Kitchen — warm restaurant styling, all local, system fonts only. */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: #ffdf9e;
+  background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.18) 0 2px, transparent 2px 64px), repeating-linear-gradient(90deg, rgba(255,255,255,.18) 0 2px, transparent 2px 64px);
+  color: #3a2415;
+  min-height: 100vh;
+}
+button { font-family: inherit; cursor: pointer; }
+.hidden { display: none !important; }
+#status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.topbar {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  padding: 12px 18px; background: #3a2415; color: #fff7e6;
+  box-shadow: 0 3px 12px rgba(0,0,0,.25); position: sticky; top: 0; z-index: 20;
+}
+.logo { font-size: 26px; font-weight: 900; letter-spacing: .3px; }
+.logo small { display: block; font-size: 11px; font-weight: 700; letter-spacing: 3px; color: #f2c94c; text-transform: uppercase; }
+.top-stats { display: flex; gap: 10px; margin-left: auto; flex-wrap: wrap; align-items: center; }
+.stat { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18); padding: 7px 12px; border-radius: 999px; font-weight: 800; font-size: 15px; white-space: nowrap; }
+.stat.urgent { background: #e5534b; animation: pulse .8s infinite alternate; }
+@keyframes pulse { from { transform: scale(1); } to { transform: scale(1.06); } }
+.top-btn { background: #f2c94c; border: 0; color: #3a2415; font-weight: 800; padding: 9px 14px; border-radius: 999px; font-size: 14px; }
+.top-btn:hover { background: #ffd95e; }
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 16px 16px 32px; }
+.section-title { font-size: 13px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; color: #8a4f24; margin: 18px 2px 8px; }
+.game-message { background: #fff; border-left: 6px solid #f2a413; border-radius: 12px; padding: 12px 14px; font-weight: 700; box-shadow: 0 2px 8px rgba(0,0,0,.12); min-height: 46px; display: flex; align-items: center; }
+.game-message.good { border-left-color: #2e9e5b; background: #eafaf0; }
+.game-message.bad { border-left-color: #e5534b; background: #fdecea; }
+
+#order-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; min-height: 148px; }
+.order-empty { grid-column: 1 / -1; background: rgba(255,255,255,.75); border: 2px dashed #c99a5b; border-radius: 14px; display: flex; align-items: center; justify-content: center; padding: 28px; font-weight: 700; color: #8a6d4d; }
+.order-card { background: #fff; border-radius: 16px; padding: 12px; box-shadow: 0 4px 14px rgba(0,0,0,.14); border-top: 6px solid #2e9e5b; }
+.order-card.impatient { border-top-color: #f2a413; }
+.order-card.angry { border-top-color: #e5534b; animation: shake .4s infinite alternate; }
+@keyframes shake { from { transform: translateX(-1px); } to { transform: translateX(1px); } }
+.order-head { display: flex; justify-content: space-between; font-weight: 800; }
+.order-dish { font-size: 19px; font-weight: 900; margin: 6px 0; }
+.order-needs { display: flex; flex-wrap: wrap; gap: 5px; }
+.chip { background: #fff3d6; border: 1px solid #e8c07a; border-radius: 999px; padding: 3px 8px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.patience { height: 9px; background: #eee; border-radius: 999px; margin-top: 10px; overflow: hidden; }
+.patience-fill { height: 100%; background: #2e9e5b; border-radius: 999px; transition: width .3s linear; }
+.order-card.impatient .patience-fill { background: #f2a413; }
+.order-card.angry .patience-fill { background: #e5534b; }
+.order-price { font-size: 12px; font-weight: 800; color: #8a6d4d; margin-top: 6px; }
+
+#ingredient-counter { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; background: linear-gradient(#b4713a, #8a4f24); padding: 14px; border-radius: 18px; box-shadow: inset 0 3px 0 rgba(255,255,255,.25), 0 6px 16px rgba(0,0,0,.2); }
+.ingredient { background: #fff7e6; border: 2px solid transparent; border-radius: 14px; padding: 10px 6px; text-align: center; transition: transform .12s ease, border-color .12s ease; }
+.ingredient:hover { transform: translateY(-3px) scale(1.03); border-color: #f2c94c; }
+.ingredient.on-plate { opacity: .55; border-color: #2e9e5b; }
+.ingredient.grilling { border-color: #e5534b; }
+.ingredient-emoji { font-size: 34px; display: block; line-height: 1.1; }
+.ingredient-name { font-weight: 800; display: block; margin-top: 4px; }
+.ingredient-note { font-size: 11px; color: #8a6d4d; font-weight: 700; }
+
+.kitchen-row { display: grid; grid-template-columns: 1fr 1.25fr; gap: 14px; margin-top: 6px; }
+.panel { background: #fff; border-radius: 18px; padding: 14px; box-shadow: 0 4px 14px rgba(0,0,0,.13); }
+.panel h2 { margin: 0 0 10px; font-size: 17px; }
+#grill-slots { display: grid; gap: 10px; }
+.grill-empty { background: #fff3d6; border-radius: 12px; padding: 14px; font-weight: 700; color: #8a6d4d; }
+.grill-slot { display: flex; align-items: center; gap: 10px; background: #2b2b2b; color: #fff; border-radius: 12px; padding: 10px 12px; font-weight: 800; width: 100%; text-align: left; border: 0; }
+.grill-slot.cooking { background: #3d2a1e; }
+.grill-slot.ready { background: #2e9e5b; }
+.grill-emoji { font-size: 28px; }
+.grill-bar { flex: 1; height: 10px; background: rgba(255,255,255,.25); border-radius: 999px; overflow: hidden; }
+.grill-bar div { height: 100%; background: #f2a413; }
+.ready-tag { margin-left: auto; font-size: 12px; }
+
+#plate-area { background: radial-gradient(circle at 50% 55%, #fff 0 58%, #e8dcc8 59% 100%); border: 3px solid #d8c8b8; }
+#plate-area.drag-over { border-color: #2e9e5b; background: #eafaf0; }
+#plate-items { min-height: 118px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; }
+.plate-empty { color: #8a6d4d; font-weight: 700; text-align: center; line-height: 1.5; }
+.plate-item { background: #fff3d6; border: 1px solid #e8c07a; border-radius: 12px; padding: 8px 10px; font-weight: 800; }
+.plate-emoji { font-size: 24px; margin-right: 4px; }
+.serve-row { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+.btn { border: 0; border-radius: 999px; padding: 12px 18px; font-weight: 900; font-size: 15px; }
+.btn-serve { background: #2e9e5b; color: #fff; flex: 1; font-size: 18px; box-shadow: 0 4px 0 #1e6e3e; }
+.btn-serve:hover { background: #37b368; }
+.btn-serve:active { transform: translateY(2px); box-shadow: none; }
+.btn-ghost { background: #fff3d6; color: #3a2415; border: 2px solid #e8c07a; }
+#recipe-book { display: grid; gap: 6px; font-size: 14px; }
+.recipe-line { background: #fff; border-radius: 10px; padding: 8px 10px; }
+.recipe-line.locked { opacity: .6; }
+
+.overlay { position: fixed; inset: 0; background: rgba(58,36,21,.72); display: flex; align-items: center; justify-content: center; padding: 18px; z-index: 50; }
+.overlay-card { background: #fff7e6; max-width: 640px; width: 100%; border-radius: 24px; padding: 28px; text-align: center; box-shadow: 0 18px 50px rgba(0,0,0,.35); max-height: 92vh; overflow: auto; }
+.overlay-card h1 { margin: 0; font-size: 42px; line-height: 1.05; }
+.overlay-card h1 span { color: #e5534b; }
+.overlay-card h2 { margin: 0; font-size: 34px; }
+.tagline { font-weight: 800; color: #8a4f24; margin: 8px 0 14px; }
+.how { text-align: left; background: #fff; border-radius: 14px; padding: 14px 16px; margin: 14px 0; line-height: 1.55; }
+.how li { margin: 5px 0; }
+.btn-start { background: #e5534b; color: #fff; font-size: 20px; padding: 14px 28px; box-shadow: 0 5px 0 #a8322b; }
+.btn-start:hover { background: #f0645c; }
+.final-stars { font-size: 44px; color: #f2a413; letter-spacing: 6px; margin: 8px 0; }
+.final-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 16px 0; }
+.final-cell { background: #fff; border-radius: 14px; padding: 12px; }
+.final-cell b { font-size: 26px; display: block; }
+.final-cell span { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #8a6d4d; }
+
+@media (max-width: 760px) {
+  #order-board { grid-template-columns: 1fr; }
+  #ingredient-counter { grid-template-columns: repeat(3, 1fr); }
+  .kitchen-row { grid-template-columns: 1fr; }
+  .logo { font-size: 20px; }
+  .overlay-card h1 { font-size: 32px; }
+  .final-grid { grid-template-columns: repeat(2, 1fr); }
+}
